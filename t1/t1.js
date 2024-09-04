@@ -7,17 +7,34 @@ const kohde = document.querySelector('tbody');
 const modaali = document.querySelector('dialog');
 const info = document.querySelector('#info');
 const closeModal = document.querySelector('#close-modal');
+const sodexoBTN = document.querySelector('#sodexo');
+const compassBTN = document.querySelector('#compass');
+const resetBTN = document.querySelector('#reset');
 
 closeModal.addEventListener('click', () => {
   modaali.close();
 });
 
-const teeRavintolaLista = async () => {
-  const restaurants = await fetchData(apiURL + '/api/v1/restaurants');
+const haeRavintolat = async () => {
+  return await fetchData(apiURL + '/api/v1/restaurants');
+};
+
+const teeRavintolaLista = async (restaurants) => {
+  kohde.innerHTML = '';
+  // filteröinti *************************
+
+  sodexoBTN.addEventListener('click', () => {
+    const filteredRestaurants = restaurants.filter(
+      (restaurant) => restaurant.company === 'Sodexo'
+    );
+    teeRavintolaLista(filteredRestaurants);
+  });
+
+  // *************************************
 
   restaurants.sort((a, b) => a.name.localeCompare(b.name));
 
-  for (const restaurant of restaurants) {
+  restaurants.forEach((restaurant) => {
     if (restaurant) {
       const {_id} = restaurant;
 
@@ -29,9 +46,9 @@ const teeRavintolaLista = async () => {
         info.innerHTML = '<div>Ladataa...</div>';
 
         const korostetut = document.querySelectorAll('.highlight');
-        for (const korostettu of korostetut) {
+        korostetut.forEach((korostettu) => {
           korostettu.classList.remove('highlight');
-        }
+        });
 
         rivi.classList.add('highlight');
 
@@ -49,7 +66,8 @@ const teeRavintolaLista = async () => {
 
       kohde.append(rivi);
     }
-  }
+  });
 };
 
-teeRavintolaLista();
+const raflat = await haeRavintolat();
+teeRavintolaLista(raflat);
