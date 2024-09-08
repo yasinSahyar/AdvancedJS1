@@ -1,0 +1,44 @@
+@font-face {
+
+  font-family: myFont;
+  src: url(bat.ttf);
+
+  font-family: 'CustomFont';
+  src: url('../fonts/CustomFont.woff2') format('woff2'),
+       url('../fonts/CustomFont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+
+
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #333333;
+  font-family: 'CustomFont', sans-serif;
+  text-align: center;
+}
+
+#app {
+  background: rgba(255, 255, 255, 0.8); /* Light background for readability */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-family: myFont;
+
+}
+
+p {
+  font-size: 1.2em;
+  margin-top: 10px;
+}
