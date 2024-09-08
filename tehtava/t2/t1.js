@@ -1,3 +1,4 @@
+//t1.js
 'use strict';
 import { restaurantModal, restaurantRow } from './components.js';
 import { fetchData } from './fetchData.js';
